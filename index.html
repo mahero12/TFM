@@ -18,5 +18,9 @@
 <body>
     <!-- Aquí se carga el mapa generado por el script mapa.py -->
     {{ map_html | safe }}
+    <script>
+        var map_html = '{{ map_html | safe }}';
+        document.body.innerHTML += map_html;
+    </script>
 </body>
 </html>
