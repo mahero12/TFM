@@ -17,6 +17,7 @@ with open("US_Accidents.csv", "wb") as f:
 # Leer el archivo CSV en un DataFrame de Pandas
 df = pd.read_csv("US_Accidents.csv")
 
+
 # Filtrar datos y crear el mapa
 df_loc = df.loc[(~df.Start_Lat.isna()) & (~df.Start_Lng.isna())]
 
@@ -44,9 +45,5 @@ longitude = -98.35
 # Crear el mapa
 map_us = create_map(df_loc, latitude, longitude, 4)
 
-# Obtener el HTML del mapa generado
-index_html = map_us.get_root().render()
-
 # Guardar el HTML en un archivo
-with open('index.html', 'w') as f:
-    f.write(index_html)
+map_us.save("mapa.html")
