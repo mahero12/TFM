@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Accidentes</title>
+    <title>Mapa de accidentes en EE. UU.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Mapa de Accidentes en Estados Unidos</h1>
-    <!-- Aquí se incrustará el mapa generado -->
-    <iframe src="mapa.html" width="100%" height="600"></iframe>
+    <!-- Aquí se carga el mapa generado por el script mapa.py -->
+    {{ map_html | safe }}
+    <script>
+        var map_html = '{{ map_html | safe }}';
+        document.body.innerHTML += map_html;
+    </script>
 </body>
 </html>
