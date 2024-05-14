@@ -1,9 +1,10 @@
+pip install folium
 import folium
 from folium.plugins import MarkerCluster
 import random
 import pandas as pd
 
-file_path = "/kaggle/input/us-accidents/US_Accidents_March23.csv"
+file_path = "TFM_limpio.csv"
 num_rows = sum(1 for row in open(file_path, 'r', encoding='utf-8')) - 1
 sample_size = 20000
 skip_rows = sorted(random.sample(range(1, num_rows + 1), num_rows - sample_size)) 
