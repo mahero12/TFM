@@ -44,8 +44,8 @@ longitude = -98.35
 map_us = create_map(df_loc, latitude, longitude, 4)
 
 # Obtener el HTML del mapa generado
-index_html = map_us.get_root().render()
+map_html = map_us._repr_html_()
 
 # Guardar el HTML en un archivo
 with open('index.html', 'w') as f:
-    f.write(index_html)
+    f.write(html_template.format(map_html=map_html))
