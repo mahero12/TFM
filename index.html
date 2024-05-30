@@ -89,7 +89,13 @@
     "Wisconsin": {"lat": 44.2685, "lon": -89.6165, "desc": "Famoso por su industria lechera y producción de queso."},
     "Wyoming": {"lat": 42.756, "lon": -107.3025, "desc": "Conocido por sus paisajes naturales y el Parque Nacional de Yellowstone."},
 };
-
+        // Información del clima por estado desde el archivo Excel
+        var clima_estados = {
+            "Texas": {"Temperatura": "25°C", "Viento": "12 km/h", "Precipitaciones": "5 mm"},
+            "Alaska": {"Temperatura": "-5°C", "Viento": "20 km/h", "Precipitaciones": "10 mm"},
+            // Información climática de otros estados...
+        };
+        
         // Función para mostrar información de clima
         function showWeather(state, month) {
             // Si el mes seleccionado es septiembre (segunda opción en el menú desplegable)
