@@ -92,15 +92,24 @@
 
         // Función para mostrar información de clima
         function showWeather(state, month) {
-            // Aquí puedes mostrar la ventana emergente correspondiente basada en el estado y el mes seleccionados
-            // Por ejemplo, podrías mostrar una ventana emergente con información meteorológica para ese estado y mes.
-            // Puedes usar librerías de JavaScript como Leaflet para crear y mostrar ventanas emergentes.
-            // Esto también puede implicar obtener datos meteorológicos de alguna API.
-            alert(`State: ${state}, Month: ${month}`);
+            // Si el mes seleccionado es septiembre (segunda opción en el menú desplegable)
+            if (month === 'septiembre') {
+                // Obtener la información climática del estado seleccionado
+                var clima_estado = clima_estados[state];
+                // Crear el contenido HTML para la ventana emergente
+                var html = `
+                    <h4>${state}</h4>
+                    <p>Temperatura: ${clima_estado['Temperatura']}</p>
+                    <p>Viento: ${clima_estado['Viento']}</p>
+                    <p>Precipitaciones: ${clima_estado['Precipitaciones']}</p>
+                `;
+                // Mostrar la ventana emergente con la información climática
+                L.popup().setContent(html).setLatLng([us_states_coords[state]['lat'], us_states_coords[state]['lon']]).openOn(map);
+            }
         }
 
         // Add a marker for each state
-        for (var state in us_states_coords) {
+         for (var state in us_states_coords) {
             var loc = us_states_coords[state];
             var html = `
                 <h4>${state}</h4>
