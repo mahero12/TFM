@@ -1,23 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mapa de accidentes en EE. UU.</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        #map {
-            width: 100%;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <title>Mapa de Accidente de EE. UU</title>
+    <!-- Importa las bibliotecas necesarias -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
 </head>
 <body>
-    <h1>Mapa de Accidentes en EE. UU</h1>
-    <!-- Aquí se carga el mapa generado por el script mapa.py -->
-    {{ map_html | safe }}
+    <!-- Crea un contenedor div para el mapa -->
+    <div id="map" style="width: 800px; height: 600px;"></div>
+
+    <script>
+        // Crea un nuevo mapa Leaflet
+        var map = L.map('map').setView([40, -4], 5);
+
+        // Agrega una capa de mapa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Crea un grupo de marcadores para agrupar los marcadores cercanos
+        var markerCluster = L.markerClusterGroup();
+        // Agrega el grupo de marcadores al mapa
+        markerCluster.addTo(map);
+
+        // Coordenadas de ejemplo
+        var coords = {
+            "Estado 1": { "lat": 40.7128, "lon": -74.0060, "desc": "Descripción del estado 1" },
+            "Estado 2": { "lat": 34.0522, "lon": -118.2437, "desc": "Descripción del estado 2" }
+            // Agrega más estados según sea necesario
+        };
+
+        // Add a marker for each state
+        for (var state in coords) {
+            var loc = coords[state];
+            var html = `
+                <h4>${state}</h4>
+                <p>${loc['desc']}</p>
+                <label for='month_${state}'>Selecciona un mes:</label>
+                <select id='month_${state}' name='month' onchange='showWeather("${state}", this.value)'>
+                    <option value='agosto'>Agosto 2022</option>
+                    <option value='septiembre'>Septiembre 2022</option>
+                    <option value='octubre'>Octubre 2022</option>
+                    <option value='noviembre'>Noviembre 2022</option>
+                    <option value='diciembre'>Diciembre 2022</option>
+                    <option value='enero'>Enero 2023</option>
+                    <option value='febrero'>Febrero 2023</option>
+                </select>
+            `;
+            var popup = L.popup().setContent(html);
+            // Crea un marcador con la ubicación y la ventana emergente
+            var marker = L.marker([loc['lat'], loc['lon']]).bindPopup(popup);
+            // Agrega el marcador al grupo de marcadores
+            markerCluster.addLayer(marker);
+        }
+
+        // Función para mostrar información de clima
+        function showWeather(state, month) {
+            // Aquí puedes mostrar la ventana emergente correspondiente basada en el estado y el mes seleccionados
+            // Por ejemplo, podrías mostrar una ventana emergente con información meteorológica para ese estado y mes.
+            // Puedes usar librerías de JavaScript como Leaflet para crear y mostrar ventanas emergentes.
+            // Esto también puede implicar obtener datos meteorológicos de alguna API.
+            alert(`State: ${state}, Month: ${month}`);
+        }
+    </script>
 </body>
 </html>
