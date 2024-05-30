@@ -22,8 +22,7 @@
     <!-- Crea un contenedor div para el mapa -->
     <div id="map"></div>
 
-    <script src="clima_estados.js"></script> <!-- Agrega el archivo JavaScript con los datos climáticos -->
-
+    
     <script>
         // Crea un nuevo mapa Leaflet
         var map = L.map('map').setView([39.5, -98.35], 4);
@@ -91,7 +90,11 @@
     "Wisconsin": {"lat": 44.2685, "lon": -89.6165, "desc": "Famoso por su industria lechera y producción de queso."},
     "Wyoming": {"lat": 42.756, "lon": -107.3025, "desc": "Conocido por sus paisajes naturales y el Parque Nacional de Yellowstone."},
 };
-        
+         var clima_estados = {
+            "Texas": {"Temperatura": "25°C", "Viento": "12 km/h", "Precipitaciones": "5 mm"},
+            "Alaska": {"Temperatura": "-5°C", "Viento": "20 km/h", "Precipitaciones": "10 mm"},
+            // Información climática de otros estados...
+        };
         // Función para mostrar información de clima
         function showWeather(state, month) {
             // Si el mes seleccionado es septiembre (segunda opción en el menú desplegable)
